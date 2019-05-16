@@ -35,7 +35,7 @@ require([
     "dojo/parser",
     "dojo/on",
     "dojo/dom",
-    "dojo/i18n!../WML_DrinkwaterPWA/nls/strings.js",
+    "dojo/i18n!nls/strings.js",
 
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane",
@@ -213,7 +213,7 @@ require([
 
             currentPosition = await projectToRd(location);
 
-            var markerSymbol = new PictureMarkerSymbol('../WML_DrinkwaterPWA/images/BGW_40.png', 25, 25);
+            var markerSymbol = new PictureMarkerSymbol('images/BGW_40.png', 25, 25);
             mapMain.graphics.add(new Graphic(currentPosition, markerSymbol));
 
             dom.byId("btnZoomToMyLocationDiv").hidden = false;
