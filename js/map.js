@@ -4,7 +4,7 @@ var currentPosition = null;
 
 // configuration, change things here
 var mapConfiguration = {
-    proxyURL: "http://localhost/proxy/proxy.ashx",
+    //proxyURL: "http://localhost/proxy/proxy.ashx",
     baseMapTopoRDVectorTileService: "https://tiles.arcgis.com/tiles/nSZVuSZjHpEZZbRo/arcgis/rest/services/Topo_RD/VectorTileServer",
     baseMapTopoRDVectorTileThumbnailURL: "https://www.arcgis.com/sharing/rest/content/items/38c4cfd9b72346c988be5fff1668ea79/info/thumbnail/thumbnail.png",
     baseMapAerialPhotoService: "https://services.arcgisonline.nl/arcgis/rest/services/Luchtfoto/Luchtfoto/MapServer",
@@ -66,8 +66,8 @@ require([
             });
         });
 
-        // Step: Specify the proxy Url
-        config.defaults.io.proxyUrl = mapConfiguration.proxyURL;
+        // // Step: Specify the proxy Url
+        // config.defaults.io.proxyUrl = mapConfiguration.proxyURL;
 
         if ('serviceWorker' in navigator) {
             try {
