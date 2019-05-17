@@ -8,7 +8,7 @@ var mapConfiguration = {
     baseMapTopoRDVectorTileService: "https://tiles.arcgis.com/tiles/nSZVuSZjHpEZZbRo/arcgis/rest/services/Topo_RD/VectorTileServer",
     baseMapTopoRDVectorTileThumbnailURL: "https://www.arcgis.com/sharing/rest/content/items/38c4cfd9b72346c988be5fff1668ea79/info/thumbnail/thumbnail.png",
     baseMapAerialPhotoService: "https://services.arcgisonline.nl/arcgis/rest/services/Luchtfoto/Luchtfoto/MapServer",
-    baseMapAerialPhotoThumbnailURL: "http://www.arcgis.com/sharing/rest/content/items/5c621f71daf34eef8d2973caa94a7b3b/info/thumbnail/thumbnail.png",
+    baseMapAerialPhotoThumbnailURL: "https://www.arcgis.com/sharing/rest/content/items/5c621f71daf34eef8d2973caa94a7b3b/info/thumbnail/thumbnail.png",
     watertappuntenService: "https://services5.arcgis.com/4IBxFxNCnjtMksej/ArcGIS/rest/services/Watertappunten_2018/FeatureServer/0",
     horecaService: "https://services5.arcgis.com/4IBxFxNCnjtMksej/arcgis/rest/services/Horecazaken_met_kraanwater_Nieuw/FeatureServer/0",
     watertappuntenServiceDefinitionExpression: "Toegang = 'Ja'",
@@ -33,6 +33,7 @@ require([
     "esri/dijit/PopupTemplate",
 
     "dojox/mobile",
+    "esri/sniff",//from example, no documentation found
 
     "dojo/parser",
     "dojo/on",
@@ -48,8 +49,8 @@ require([
     function (Map, FeatureLayer, config, esriBasemaps, Point, SpatialReference, projection,
         PictureMarkerSymbol, Graphic,
         BasemapToggle, LayerList, PopupTemplate,
-        mobile,
-        parser, _on, dom, i18nStrings,
+        mobile, has,
+        parser, on, dom, i18nStrings,
         _BorderContainer, _ContentPane, registry) {
 
         // Parse DOM nodes decorated with the data-dojo-type attribute
@@ -86,6 +87,10 @@ require([
         SetBaseMap();
 
         mapMain.on("load", mapLoadHandler);
+
+        // onorientationchange doesn't always fire in a timely manner in Android so check for both orientationchange and resize
+        var resizeEvt = (window.onorientationchange !== undefined && !has('android')) ? "orientationchange" : "resize";
+        on(window, resizeEvt, resizeMap);
 
         //hide the popup if its outside the map's extent
         mapMain.on("mouse-drag", function (evt) {
@@ -149,18 +154,34 @@ require([
         }
 
         function resizeMap() {
-            //mobile.hideAddressBar();
             adjustMapHeight();
             mapMain.resize();
             mapMain.reposition();
         }
 
         function adjustMapHeight() {
-            var availHeight = mobile.getScreenSize().h; //- registry.byId('header').domNode.clientHeight - 1;
-            // if (has('iphone') || has('ipod')) {
-            //     availHeight += iphoneAdjustment();
-            // }
+            var availHeight = mobile.getScreenSize().h;
+            if (has('iphone') || has('ipod')) {
+                availHeight += iphoneAdjustment();
+            }
             dom.byId("divMap").style.height = availHeight + "px";
+        }
+
+        function iphoneAdjustment() {
+            var screenSize = mobile.getScreenSize();
+            if (screenSize.h > screenSize.w) { //portrait
+                //Need to add address bar height back to map
+                return screen.availHeight - window.innerHeight - 40;
+                /* 40 = height of bottom safari toolbar */
+            }
+            else { //landscape
+                //Need to react to full screen / bottom bar visible toggles
+                var _conn = on(window, 'resize', function () {
+                    _conn.remove();
+                    resizeMap();
+                });
+                return 0;
+            }
         }
 
         function AddBaseMapToggle() {
