@@ -170,8 +170,7 @@ require([
 
         function iphoneAdjustment() {
             // Not for standalone
-            const isInWebAppiOS = (window.navigator.standalone === true);
-            if (isInWebAppiOS){
+            if (window.navigator.standalone){
                 return 0;
             }
 
