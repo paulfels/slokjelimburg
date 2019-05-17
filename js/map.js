@@ -169,6 +169,12 @@ require([
         }
 
         function iphoneAdjustment() {
+            // Not for standalone
+            const isInWebAppiOS = (window.navigator.standalone === true);
+            if (isInWebAppiOS){
+                return 0;
+            }
+
             var screenSize = mobile.getScreenSize();
             if (screenSize.h > screenSize.w) { //portrait
                 //Need to add address bar height back to map
