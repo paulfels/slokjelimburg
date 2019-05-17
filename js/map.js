@@ -162,9 +162,9 @@ require([
 
         function adjustMapHeight() {
             var availHeight = mobile.getScreenSize().h;
-            if (has('iphone') || has('ipod')) {
-                availHeight += iphoneAdjustment();
-            }
+            // if (has('iphone') || has('ipod')) {
+            //     availHeight += iphoneAdjustment();
+            // }
             dom.byId("divMap").style.height = availHeight + "px";
         }
 
