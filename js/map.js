@@ -12,7 +12,8 @@ var mapConfiguration = {
     watertappuntenService: "https://services5.arcgis.com/4IBxFxNCnjtMksej/ArcGIS/rest/services/Watertappunten_2018/FeatureServer/0",
     horecaService: "https://services5.arcgis.com/4IBxFxNCnjtMksej/arcgis/rest/services/Horecazaken_met_kraanwater_Nieuw/FeatureServer/0",
     watertappuntenServiceDefinitionExpression: "Toegang = 'Ja'",
-    horecaServiceDefinitionExpression: ""
+    horecaServiceDefinitionExpression: "",
+    showMessageTimeout: 5000//2000
 };
 
 // @formatter:off
@@ -168,13 +169,17 @@ require([
         }
 
         function iphoneAdjustment() {
+            showTempMessage("iphoneAdjustment");
             var screenSize = mobile.getScreenSize();
             if (screenSize.h > screenSize.w) { //portrait
+                showTempMessage("iphoneAdjustment - portrait");
                 //Need to add address bar height back to map
                 return screen.availHeight - window.innerHeight - 40;
                 /* 40 = height of bottom safari toolbar */
             }
             else { //landscape
+
+                showTempMessage("iphoneAdjustment - lanscape");
                 //Need to react to full screen / bottom bar visible toggles
                 var _conn = on(window, 'resize', function () {
                     _conn.remove();
@@ -329,7 +334,7 @@ require([
             return new Promise(() => {
                 setTimeout(() => {
                     dom.byId("messageDiv").innerHTML = "";
-                }, 2000);
+                }, mapConfiguration.showMessageTimeout);
             });
         }
     });
