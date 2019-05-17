@@ -170,14 +170,14 @@ require([
 
         function iphoneAdjustment() {
             // Not for standalone
-            if (window.navigator.standalone){
-                return 20;
+            if (window.navigator.standalone) {
+                return 0; // there is still a small space on top (Portrait) or on the bottom (Landscape) returning 20 didn't do anything
             }
 
             var screenSize = mobile.getScreenSize();
             if (screenSize.h > screenSize.w) { //portrait
                 //Need to add address bar height back to map
-                return screen.availHeight - window.innerHeight - 40;
+                return screen.availHeight - window.innerHeight - 80;// - 40;
                 /* 40 = height of bottom safari toolbar */
             }
             else { //landscape
