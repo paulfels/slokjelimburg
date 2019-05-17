@@ -32,6 +32,8 @@ require([
     "esri/dijit/LayerList",
     "esri/dijit/PopupTemplate",
 
+    "dojox/mobile",
+
     "dojo/parser",
     "dojo/on",
     "dojo/dom",
@@ -46,6 +48,7 @@ require([
     function (Map, FeatureLayer, config, esriBasemaps, Point, SpatialReference, projection,
         PictureMarkerSymbol, Graphic,
         BasemapToggle, LayerList, PopupTemplate,
+        mobile,
         parser, _on, dom, i18nStrings,
         _BorderContainer, _ContentPane, registry) {
 
@@ -81,6 +84,8 @@ require([
         AddRdBaseMaps();
 
         SetBaseMap();
+
+        mapMain.on("load", mapLoadHandler);
 
         //hide the popup if its outside the map's extent
         mapMain.on("mouse-drag", function (evt) {
@@ -136,6 +141,26 @@ require([
                 center: point,
                 zoom: 5
             });
+        }
+
+        function mapLoadHandler(evt) {
+            resizeMap();
+            registry.byId('divMap').on('AfterTransitionIn', resizeMap);
+        }
+
+        function resizeMap() {
+            //mobile.hideAddressBar();
+            adjustMapHeight();
+            mapMain.resize();
+            mapMain.reposition();
+        }
+
+        function adjustMapHeight() {
+            var availHeight = mobile.getScreenSize().h; //- registry.byId('header').domNode.clientHeight - 1;
+            // if (has('iphone') || has('ipod')) {
+            //     availHeight += iphoneAdjustment();
+            // }
+            dom.byId("divMap").style.height = availHeight + "px";
         }
 
         function AddBaseMapToggle() {
@@ -220,17 +245,6 @@ require([
 
             dom.byId("btnZoomToMyLocationDiv").hidden = false;
             dom.byId("btnPanToMyLocationDiv").hidden = false;
-            // if (mapMain.graphics !== null) {
-            //     mapMain.graphics.clear();
-            // }
-
-            // currentPosition = await projectToRd(location);
-
-            // var markerSymbol = new PictureMarkerSymbol('images/BGW_40.png', 25, 25);
-            // mapMain.graphics.add(new Graphic(currentPosition, markerSymbol));
-
-            // dom.byId("btnZoomToMyLocationDiv").hidden = false;
-            // dom.byId("btnPanToMyLocationDiv").hidden = false;
         }
 
         function zoomToMyLocation() {
