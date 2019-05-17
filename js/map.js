@@ -171,7 +171,7 @@ require([
         function iphoneAdjustment() {
             // Not for standalone
             if (window.navigator.standalone){
-                return 0;
+                return 20;
             }
 
             var screenSize = mobile.getScreenSize();
