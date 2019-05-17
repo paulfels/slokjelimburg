@@ -207,9 +207,11 @@ require([
 
         async function updateLocation(location) {
 
-            if (mapMain.graphics !== null) {
-                mapMain.graphics.clear();
+            if (mapMain.graphics === null) {
+                return;
             }
+
+            mapMain.graphics.clear();
 
             currentPosition = await projectToRd(location);
 
@@ -218,6 +220,17 @@ require([
 
             dom.byId("btnZoomToMyLocationDiv").hidden = false;
             dom.byId("btnPanToMyLocationDiv").hidden = false;
+            // if (mapMain.graphics !== null) {
+            //     mapMain.graphics.clear();
+            // }
+
+            // currentPosition = await projectToRd(location);
+
+            // var markerSymbol = new PictureMarkerSymbol('images/BGW_40.png', 25, 25);
+            // mapMain.graphics.add(new Graphic(currentPosition, markerSymbol));
+
+            // dom.byId("btnZoomToMyLocationDiv").hidden = false;
+            // dom.byId("btnPanToMyLocationDiv").hidden = false;
         }
 
         function zoomToMyLocation() {
