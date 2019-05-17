@@ -165,7 +165,7 @@ require([
             if (has('iphone') || has('ipod')) {
                 availHeight += iphoneAdjustment();
             }
-            dom.byId("mapDiv").style.height = availHeight + "px";
+            dom.byId("divMap").style.height = availHeight + "px";
         }
 
         function iphoneAdjustment() {
