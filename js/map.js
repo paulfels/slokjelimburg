@@ -176,14 +176,21 @@ require([
 
             var screenSize = mobile.getScreenSize();
             if (screenSize.h > screenSize.w) { //portrait
+
+                 //Need to react to full screen / bottom bar visible toggles
+                 var conn = on(window, 'resize', function () {
+                    conn.remove();
+                    resizeMap();
+                });
+
                 //Need to add address bar height back to map
-                return screen.availHeight - window.innerHeight - 80;// - 40;
+                return screen.availHeight - window.innerHeight - 100;// - 40;
                 /* 40 = height of bottom safari toolbar */
             }
             else { //landscape
                 //Need to react to full screen / bottom bar visible toggles
-                var _conn = on(window, 'resize', function () {
-                    _conn.remove();
+                var conn = on(window, 'resize', function () {
+                    conn.remove();
                     resizeMap();
                 });
                 return 0;
