@@ -177,11 +177,11 @@ require([
             var screenSize = mobile.getScreenSize();
             if (screenSize.h > screenSize.w) { //portrait
 
-                 //Need to react to full screen / bottom bar visible toggles
-                 var conn = on(window, 'resize', function () {
-                    conn.remove();
-                    resizeMap();
-                });
+                //  //Need to react to full screen / bottom bar visible toggles
+                //  var conn = on(window, 'resize', function () {
+                //     conn.remove();
+                //     resizeMap();
+                // });
 
                 //Need to add address bar height back to map
                // return screen.availHeight - window.innerHeight - 120;// - 40;
@@ -192,7 +192,6 @@ require([
                 var conn = on(window, 'resize', function () {
                     conn.remove();
                     resizeMap();
-                    mapMain.reposition();
                 });
 
                 return 0;                
