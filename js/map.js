@@ -193,7 +193,9 @@ require([
                     conn.remove();
                     resizeMap();
                 });
-                return 0;
+                
+                //return 0;
+                return screen.availHeight - window.innerHeight - 40;
             }
         }
 
