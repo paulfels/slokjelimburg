@@ -166,7 +166,6 @@ require([
                 availHeight += iphoneAdjustment();
             }
             dom.byId("divMap").style.height = availHeight + "px";
-            dom.byId("border").style.height = availHeight + "px";
         }
 
         function iphoneAdjustment() {
@@ -188,8 +187,8 @@ require([
                 //var temp = screen.availHeight - window.innerHeight - 40;
                 /* 40 = height of bottom safari toolbar */
 
-                // dom.byId("border").style.position = "static";
-                // dom.byId("border").style.top = 0 + "px";
+                dom.byId("border").style.position = "static";
+                dom.byId("border").style.top = 0 + "px";
                 return 0; 
             }
             else { //landscape
@@ -199,8 +198,8 @@ require([
                     resizeMap();
                 });
 
-                // dom.byId("border").style.position = "relative";
-                // dom.byId("border").style.top = 1 + "px";
+                dom.byId("border").style.position = "relative";
+                dom.byId("border").style.top = 1 + "px";
                 return 0;                
             }
         }
