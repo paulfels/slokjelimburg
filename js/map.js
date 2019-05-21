@@ -157,7 +157,7 @@ require([
         function resizeMap() {
             adjustMapHeight();
             mapMain.resize();
-            mapMain.reposition(true);
+            mapMain.reposition();
         }
 
         function adjustMapHeight() {
@@ -184,7 +184,7 @@ require([
                 });
 
                 //Need to add address bar height back to map
-               // return screen.availHeight - window.innerHeight - 120;// - 40;
+                return screen.availHeight - window.innerHeight - 120;// - 40;
                 /* 40 = height of bottom safari toolbar */
             }
             else { //landscape
