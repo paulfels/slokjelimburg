@@ -157,7 +157,7 @@ require([
         function resizeMap() {
             adjustMapHeight();
             mapMain.resize();
-            mapMain.reposition();
+           // mapMain.reposition();
         }
 
         function adjustMapHeight() {
