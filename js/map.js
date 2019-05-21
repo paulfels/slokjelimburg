@@ -195,9 +195,8 @@ require([
                     resizeMap();
                 });
 
-                // dom.byId("divMap").style.position = "relative";
-                // dom.byId("divMap").style.top = 20 + "px";
-                // dom.byId("divMap").style.left = 20 + "px";
+                dom.byId("border").style.position = "relative";
+                dom.byId("border").style.top = 40 + "px";
                 return 0;                
             }
         }
