@@ -184,8 +184,9 @@ require([
                 });
 
                 //Need to add address bar height back to map
-                return screen.availHeight - window.innerHeight - 40;
+                // return screen.availHeight - window.innerHeight - 40;
                 /* 40 = height of bottom safari toolbar */
+                return 0; 
             }
             else { //landscape
                 //Need to react to full screen / bottom bar visible toggles
