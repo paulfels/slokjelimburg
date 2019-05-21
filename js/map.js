@@ -199,7 +199,7 @@ require([
                 });
 
                 dom.byId("border").style.position = "relative";
-               // dom.byId("border").style.top = 40 + "px";
+                dom.byId("border").style.top = 20 + "px";
                 return 0;                
             }
         }
