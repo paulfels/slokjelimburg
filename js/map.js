@@ -184,8 +184,11 @@ require([
                 });
 
                 //Need to add address bar height back to map
-                var temp = screen.availHeight - window.innerHeight - 40;
+                //var temp = screen.availHeight - window.innerHeight - 40;
                 /* 40 = height of bottom safari toolbar */
+
+                dom.byId("border").style.position = "static";
+                dom.byId("border").style.top = 0 + "px";
                 return 0; 
             }
             else { //landscape
