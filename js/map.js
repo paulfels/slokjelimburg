@@ -199,7 +199,7 @@ require([
                 });
 
                 dom.byId("border").style.position = "relative";
-                dom.byId("border").style.top = 1 + "px";
+                dom.byId("border").style.top = 1 + "px"; // This results in full screen after rotation
                 return 0;                
             }
         }
