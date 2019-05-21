@@ -157,7 +157,7 @@ require([
         function resizeMap() {
             adjustMapHeight();
             mapMain.resize();
-           // mapMain.reposition();
+            mapMain.reposition();
         }
 
         function adjustMapHeight() {
@@ -195,6 +195,9 @@ require([
                     resizeMap();
                 });
 
+                dom.byId("divMap").style.position = "relative";
+                dom.byId("divMap").style.top = 20 + "px";
+                dom.byId("divMap").style.left = 20 + "px";
                 return 0;                
             }
         }
