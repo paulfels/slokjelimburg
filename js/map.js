@@ -192,10 +192,10 @@ require([
                 var conn = on(window, 'resize', function () {
                     conn.remove();
                     resizeMap();
+                    mapMain.reposition();
                 });
-                
-                //return 0;
-                return screen.availHeight - window.innerHeight - 40;
+
+                return 0;                
             }
         }
 
